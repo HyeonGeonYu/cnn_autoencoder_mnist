@@ -7,6 +7,11 @@ A simple autoencoder to recover MNIST data using convolutional and de-convolutio
 Train an AutoEncoder, generate recoverd images, and do t-sne on embeddings.
 
 ```shell
+conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cudatoolkit=10.2 -c pytorch
+conda install matplotlib
+```
+
+```shell
     python main.py
 ```
 
