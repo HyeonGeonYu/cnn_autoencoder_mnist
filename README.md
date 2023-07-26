@@ -1,10 +1,7 @@
-# CNN AutoEncoder on MNIST 
-
-A simple autoencoder to recover MNIST data using convolutional and de-convolutional layers.
+# cnn_autoencoder_mnist
+This repository is for comparing CNN and DNN autoencoders.
 
 # Usage
-
-Train an AutoEncoder, generate recoverd images, and do t-sne on embeddings.
 
 ```shell
 conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cudatoolkit=10.2 -c pytorch
@@ -12,23 +9,18 @@ conda install matplotlib
 ```
 
 ```shell
-    python main.py
+    python train.py
+    python plot_result.py
 ```
 
-# Recovered Image
+# 2-dim Manifold result
+*DNN* | *CNN*
+:---: | :---: 
+<img src="result_img/1_dnn_autoencoder_2023_07_26_14_55_06.png" width=280px> | <img src="result_img/1_cnn_autoencoder_2023_07_26_17_01_53.png" width=280px> 
 
-The dimension of embedding is `10`.
+# re-generation result
+*DNN* | *CNN*
+:---: | :---: 
+<img src="result_img/2_dnn_autoencoder_2023_07_26_14_55_06.png" width=280px> | <img src="result_img/2_cnn_autoencoder_2023_07_26_17_01_53.png" width=280px>
 
-Fig.1 and Fig3 in each row are `real images`, Fig.2 and Fig.4 in each row are `recovered images`.
-
-*Epoch 0* | *Epoch 5* | *Epoch 9*
-:---: | :---: | :---: 
-<img src="figs/AE/sample_epoch_0.png" width=280px> | <img src="figs/AE/sample_epoch_5.png" width=280px> | <img src="figs/AE/sample_epoch_9.png" width=280px> | 
-
-# t-sne visualization of embeddings
-
-Use t-sne to reduce embeddings' dimension `10` down to `2`, so as to scatter in a coordinate system.
-
-<center>
-<img src="figs/AE/tsne.png" width=600px>
 

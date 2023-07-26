@@ -8,18 +8,17 @@ import parameters
 from datetime import datetime
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+
+"""
 from src.Autoencoder_DNN import Model
 criterion = torch.nn.MSELoss().to(device)
-
 """
 from src.Autoencoder_CNN import Model
-criterion = torch.nn.MSELoss().to(device) 
-"""
+#criterion = torch.nn.MSELoss().to(device)
+criterion = torch.nn.BCELoss().to(device)
 
-"""
-from src.DNN import Model
-criterion = torch.nn.CrossEntropyLoss().to(device)
-"""
+
+
 
 args = parameters.para_config()
 now = datetime.now()
@@ -56,7 +55,7 @@ if __name__ == "__main__":
         # train
         total_loss = 0.
         for idx, (x_batch, target) in enumerate(training_data):
-            x_batch = torch.flatten(x_batch, 1).to(device)
+            x_batch = x_batch.to(device)
             target = target.to(device)
             output = net(x_batch)
             loss = criterion(output,x_batch)
@@ -69,8 +68,6 @@ if __name__ == "__main__":
             mean_loss = total_loss / (idx + 1)
 
 
-
-            match = target == torch.argmax(output, axis=1)
             print("\r" + now.strftime(
                 "%Y-%m-%d %H:%M:%S - ") +
                   'Epoch: {};  '
@@ -91,7 +88,7 @@ if __name__ == "__main__":
         with torch.no_grad():
             total_loss = 0.
             for idx, (x_batch, target) in enumerate(test_data):
-                x_batch = torch.flatten(x_batch, 1).to(device)
+                x_batch = x_batch.to(device)
                 target = target.to(device)
                 output = net(x_batch)
                 loss = criterion(output,x_batch)
@@ -99,7 +96,6 @@ if __name__ == "__main__":
                 total_loss += loss.detach().item()
                 mean_loss = total_loss / (idx + 1)
 
-                match = target == torch.argmax(output, axis=1)
                 print("\r" + now.strftime(
                     "%Y-%m-%d %H:%M:%S - ") +
                       'Epoch: {};  '

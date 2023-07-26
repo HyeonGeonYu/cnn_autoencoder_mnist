@@ -1,22 +1,51 @@
 import torch
 
 
-class Encoder(torch.nn.Module):
+class Model(torch.nn.Module):
     def __init__(self, input_shape):
         super().__init__()
 
-        self.seq = torch.nn.Sequential(
-            torch.nn.Linear(input_shape, 512),
-            torch.nn.ELU(),
-            torch.nn.Linear(512, 256),
-            torch.nn.LeakyReLU(),
-            torch.nn.Linear(256, 10),
-            torch.nn.Softmax(0)
+        self.seq1 = torch.nn.Sequential(
+            torch.nn.Conv2d(1,16,(3,3),padding='same'),
+            torch.nn.ReLU(),
+            torch.nn.MaxPool2d((2,2)),
+            torch.nn.Conv2d(16, 8, (3, 3), padding='same'),
+            torch.nn.ReLU(),
+            torch.nn.MaxPool2d((2, 2)))
+
+        self.seq2 = torch.nn.Sequential(
+            torch.nn.Linear(392,128),
+            torch.nn.ReLU(),
+            torch.nn.Linear(128, 64),
+            torch.nn.ReLU(),
+            torch.nn.Linear(64, 2))
+
+        self.seq3 = torch.nn.Sequential(
+            torch.nn.Linear(2, 64),
+            torch.nn.ReLU(),
+            torch.nn.Linear(64, 128),
+            torch.nn.ReLU(),
+            torch.nn.Linear(128, 392))
+
+        self.seq4= torch.nn.Sequential(
+            torch.nn.Conv2d(8, 8, (3, 3), padding='same'),
+            torch.nn.ReLU(),
+            torch.nn.Upsample(scale_factor=2),
+            torch.nn.Conv2d(8, 16, (3, 3), padding='same'),
+            torch.nn.ReLU(),
+            torch.nn.Upsample(scale_factor=2),
+            torch.nn.Conv2d(16, 1, (3, 3), padding='same'),
+            torch.nn.Sigmoid()
         )
 
     def forward(self, x):
-
-        x = self.seq(x)
+        bs = x.shape[0]
+        x = self.seq1(x)
+        x = x.reshape(bs,-1)
+        x = self.seq2(x)
+        x = self.seq3(x)
+        x = x.reshape(bs, 8,7,7)
+        x = self.seq4(x)
         return x
 
 
