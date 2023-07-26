@@ -14,13 +14,17 @@ conda install matplotlib
 ```
 
 # 2-dim Manifold result
-*DNN* | *CNN*
-:---: | :---: 
-<img src="result_img/1_dnn_autoencoder_2023_07_26_14_55_06.png" width=280px> | <img src="result_img/1_cnn_autoencoder_2023_07_26_17_01_53.png" width=280px> 
+*DNN* | *CNN* | *DAE* 
+:---: | :---: | :---: 
+<img src="result_img/1_dnn_autoencoder_2023_07_26_14_55_06.png" width=280px> | <img src="result_img/1_cnn_autoencoder_2023_07_26_17_01_53.png" width=280px> | <img src="result_img/1_DAE_autoencoder_2023_07_26_18_00_02.png" width=280px> 
 
 # re-generation result
-*DNN* | *CNN*
-:---: | :---: 
-<img src="result_img/2_dnn_autoencoder_2023_07_26_14_55_06.png" width=280px> | <img src="result_img/2_cnn_autoencoder_2023_07_26_17_01_53.png" width=280px>
+*DNN* | *CNN* | *DAE* 
+:---: | :---: | :---: 
+<img src="result_img/2_dnn_autoencoder_2023_07_26_14_55_06.png" width=280px> | <img src="result_img/2_cnn_autoencoder_2023_07_26_17_01_53.png" width=280px> | <img src="result_img/2_DAE_autoencoder_2023_07_26_18_00_02.png" width=280px>
 
+# re-generation with noisy-input result 
+*DNN* |                                    *CNN*                                     | *DAE* 
+:---: |:----------------------------------------------------------------------------:| :---: 
+<img src="result_img/3_dnn_autoencoder_2023_07_26_14_55_06.png" width=280px> | <img src="result_img/3_cnn_autoencoder_2023_07_26_17_01_53.png" width=280px> | <img src="result_img/3_DAE_autoencoder_2023_07_26_18_00_02.png" width=280px>
 
