@@ -1,10 +1,7 @@
-import parameters
-
 import torchvision as tv
 import torch
 import os
 from datetime import datetime
-import parameters
 from datetime import datetime
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -14,15 +11,11 @@ from src.Autoencoder_DNN import Model
 criterion = torch.nn.MSELoss().to(device)
 """
 from src.Autoencoder_CNN import Model
-#criterion = torch.nn.MSELoss().to(device)
 criterion = torch.nn.BCELoss().to(device)
 
 
-
-
-args = parameters.para_config()
 now = datetime.now()
-NUM_EPOCHS = args.epochs
+NUM_EPOCHS = 60
 SAVE_PATH = "saved_models/autoencoder_"+now.strftime("%Y_%m_%d_%H_%M_%S")
 BATCH_SIZE = 1000
 test_model = "Autoencoder_DNN"

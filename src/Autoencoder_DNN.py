@@ -6,17 +6,17 @@ class Model(torch.nn.Module):
         super().__init__()
 
         self.seq = torch.nn.Sequential(
-            torch.nn.Linear(input_shape, 512),
+            torch.nn.Linear(input_shape, 1024),
             torch.nn.ReLU(),
-            torch.nn.Linear(512, 256),
+            torch.nn.Linear(1024, 1024),
             torch.nn.ReLU(),
-            torch.nn.Linear(256, 2),
-            
-            torch.nn.Linear(2, 256),
+            torch.nn.Linear(1024, 2),
+
+            torch.nn.Linear(2, 1024),
             torch.nn.ReLU(),
-            torch.nn.Linear(256, 512),
+            torch.nn.Linear(1024, 1024),
             torch.nn.ReLU(),
-            torch.nn.Linear(512, input_shape),
+            torch.nn.Linear(1024, input_shape),
             torch.nn.Sigmoid(),
         )
 

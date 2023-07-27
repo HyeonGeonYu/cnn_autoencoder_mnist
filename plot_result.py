@@ -7,7 +7,7 @@ BATCH_SIZE = 1000
 test_data = tv.datasets.MNIST("data/", train=False, download=True, transform=tv.transforms.ToTensor())
 test_data = torch.utils.data.DataLoader(test_data, batch_size=BATCH_SIZE, shuffle=False)
 
-SAVE_PATH = "saved_models/dnn_autoencoder_2023_07_26_14_55_06"
+SAVE_PATH = "saved_models/autoencoder_2023_07_26_19_37_55"
 test_scheme = "dnn"
 
 
@@ -16,7 +16,7 @@ net = torch.load(SAVE_PATH).to(device)
 
 with torch.no_grad():
 
-    """
+
     ### test manifold
     for idx, (x_batch, target) in enumerate(test_data):
         x_batch = x_batch.to(device)
@@ -38,17 +38,22 @@ with torch.no_grad():
 
     plt.colorbar()
     plt.show()
-    """
+
 
     ### test re-generation
     n = 10
     plt.figure(figsize=(20*0.9, 4*0.9))
     for idx, (x_batch, target) in enumerate(test_data):
+        """
         x_batch = x_batch.to(device)
         output = net(x_batch)
-        #x_batch_noisy = x_batch + torch.randn(x_batch.shape).to(device)
-        #output = net(x_batch_noisy)
+        """
+        x_batch = x_batch.to(device)
+        x_batch_noisy = x_batch + torch.randn(x_batch.shape).to(device)
+        output = net(x_batch_noisy)
+
         for i in range(n):
+            """
             ax = plt.subplot(2, n, i + 1)
             plt.gray()
             ax.imshow(x_batch[i].reshape(28, 28).cpu())
@@ -80,7 +85,7 @@ with torch.no_grad():
             ax.imshow(output[i].reshape(28, 28).cpu())
             ax.get_xaxis().set_visible(False)
             ax.get_yaxis().set_visible(False)
-            """
+
         plt.show()
         break
 
